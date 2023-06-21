@@ -8,21 +8,18 @@ export default function Forecast(props) {
   let [forecastData, setForecastData] = useState(null);
 
   useEffect(() => {
+    let city = props.city;
+    const apiKey = "e880e48179885be1b51452f8ef1b39be";
+    let units = "imperial";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${units}`;
+
     setReady(false);
+    axios.get(apiUrl).then(displayForecast);
   }, [props.city]);
 
   function displayForecast(response) {
     setForecastData(response.data.daily);
     setReady(true);
-  }
-
-  function load() {
-    let city = props.city;
-    const apiKey = "0a2c2733of6f535f4bbc5b14t3c60ea9";
-    let units = "imperial";
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${units}`;
-
-    axios.get(apiUrl).then(displayForecast);
   }
 
   if (ready) {
@@ -44,7 +41,6 @@ export default function Forecast(props) {
       </div>
     );
   } else {
-    load();
     return null;
   }
 }
