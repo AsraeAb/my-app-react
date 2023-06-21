@@ -1,41 +1,40 @@
 import React, { useState, useEffect } from "react";
 import "./Forecast.css";
 import axios from "axios";
-import Days from "./Days.js";
+import Days from "./Days";
 
-export default function Forecast(props) {
-  let [ready, setReady] = useState(false);
-  let [forecastData, setForecastData] = useState(null);
+export default function WeatherForecast(props) {
+  let [loaded, setLoaded] = useState(false);
+  let [forecast, setForecast] = useState(null);
+
+  // if the coordinates change
+  // set loaded false
 
   useEffect(() => {
-    setReady(false);
-    if (props.coordinates) {
-      handle();
-    }
+    setLoaded(false);
   }, [props.coordinates]);
 
-  function displayForecast(response) {
-    setForecastData(response.data.daily);
-    setReady(true);
+  function handleResponse(response) {
+    setForecast(response.data.daily);
+    setLoaded(true);
   }
 
-  function handle() {
-    const apiKey = "2daf65f0cdaa917f11026e8a128ce271";
-    let units = "imperial";
-    let lon = props.coordinates.lon;
-    let lat = props.coordinates.lat;
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(displayForecast);
+  function load() {
+    let longitude = props.coordinates.lon;
+    let latitude = props.coordinates.lat;
+    let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
   }
 
-  if (ready && forecastData) {
+  if (loaded) {
     return (
-      <div className="Forecast">
+      <div className="WeatherForecast">
         <div className="row">
-          {forecastData.map(function (dailyForecast, index) {
-            if (index < 5) {
+          {forecast.map(function (dailyForecast, index) {
+            if (index < 4) {
               return (
-                <div className="col forecast-column" key={index}>
+                <div className="col mb-5" key={index}>
                   <Days data={dailyForecast} />
                 </div>
               );
@@ -47,6 +46,8 @@ export default function Forecast(props) {
       </div>
     );
   } else {
+    load();
+
     return null;
   }
 }

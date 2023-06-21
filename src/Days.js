@@ -1,31 +1,37 @@
 import React from "react";
+import Icons from "./Icons";
+export default function WeatherForecastDay(props) {
+  function maxTemperature() {
+    let temperature = Math.round(props.data.temp.max);
+    return `${temperature}°`;
+  }
 
-export default function Days(props) {
+  function minTemperature() {
+    let temperature = Math.round(props.data.temp.min);
+    return `${temperature}°`;
+  }
+
   function day() {
-    let date = new Date(props.data.time * 1000);
+    let date = new Date(props.data.dt * 1000);
     let day = date.getDay();
+
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
     return days[day];
   }
+
   return (
-    <div className="DayColumn">
-      {" "}
-      <div className="forecast-icon">
-        <img
-          src={props.data.condition.icon_url}
-          className="forecast-icon"
-          description={props.data.condition.icon}
-          alt={props.data.condition.icon}
-        />
+    <div>
+      <div className="WeatherForecast-day mb-2">{day()}</div>
+      <Icons code={props.data.weather[0].icon} />
+      <div className="WeatherForecast-temperatures mt-2">
+        <span className="WeatherForecast-temperature-max">
+          {maxTemperature()}
+        </span>
+        <span className="WeatherForecast-temperature-min">
+          {minTemperature()}
+        </span>
       </div>
-      <div className="forecast-day">{day()}</div>
-      <span className="temp-min">
-        {Math.round(props.data.temperature.minimum)}°
-      </span>{" "}
-      -{" "}
-      <span className="temp-max">
-        {Math.round(props.data.temperature.maximum)}°
-      </span>
     </div>
   );
 }
