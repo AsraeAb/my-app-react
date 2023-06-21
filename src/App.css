@@ -14,11 +14,23 @@
   font-size: calc(10px + 2vmin);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+a {
+  text-decoration: none;
+}
+header {
+  margin: 20px auto;
+}
+h1 {
+  display: block;
+  margin: 0 auto 10px;
+  color: #f8b62d;
+  text-align: center;
+}
+.search-row {
+  text-align: center;
+}
+.github-link {
+  font-size: 18px;
+  text-align: center;
+  display: block;
 }

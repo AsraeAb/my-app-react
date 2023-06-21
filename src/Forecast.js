@@ -9,7 +9,7 @@ export default function Forecast(props) {
 
   useEffect(() => {
     let city = props.city;
-    const apiKey = "e880e48179885be1b51452f8ef1b39be";
+    const apiKey = "2daf65f0cdaa917f11026e8a128ce271";
     let units = "imperial";
     let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${units}`;
 

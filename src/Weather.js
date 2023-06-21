@@ -31,7 +31,7 @@ export default function Search(props) {
   }
 
   function handleCall() {
-    let apiKey = "e880e48179885be1b51452f8ef1b39be";
+    let apiKey = "2daf65f0cdaa917f11026e8a128ce271";
     let units = "imperial";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(showWeather);
@@ -65,11 +65,11 @@ export default function Search(props) {
         </form>
         <WeatherInfo data={loaded} />
         <hr />
-        <Forecast coordinates={loaded.coordinates} />
+        <Forecast city={loaded.city} />
       </div>
     );
   } else {
     handleCall();
-    return null;
+    return "loading";
   }
 }
