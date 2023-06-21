@@ -8,21 +8,27 @@ export default function Forecast(props) {
   let [forecastData, setForecastData] = useState(null);
 
   useEffect(() => {
-    let city = props.city;
-    const apiKey = "2daf65f0cdaa917f11026e8a128ce271";
-    let units = "imperial";
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${units}`;
-
     setReady(false);
-    axios.get(apiUrl).then(displayForecast);
-  }, [props.city]);
+    if (props.coordinates) {
+      handle();
+    }
+  }, [props.coordinates]);
 
   function displayForecast(response) {
     setForecastData(response.data.daily);
     setReady(true);
   }
 
-  if (ready) {
+  function handle() {
+    const apiKey = "2daf65f0cdaa917f11026e8a128ce271";
+    let units = "imperial";
+    let lon = props.coordinates.lon;
+    let lat = props.coordinates.lat;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+    axios.get(apiUrl).then(displayForecast);
+  }
+
+  if (ready && forecastData) {
     return (
       <div className="Forecast">
         <div className="row">
