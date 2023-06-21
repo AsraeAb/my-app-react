@@ -1,52 +1,75 @@
 import React, { useState } from "react";
+
 import axios from "axios";
-export default function Search() {
-  let [city, setCity] = useState("");
-  let [weather, setWeather] = useState({});
-  let [loaded, setLoaded] = useState(false);
+
+import "./Weather.css";
+import WeatherInfo from "./WeatherInfo";
+import Forecast from "./Forecast";
+
+export default function Search(props) {
+  let [city, setCity] = useState(props.defaultCity);
+
+  let [loaded, setLoaded] = useState({ ready: false });
 
   function showWeather(response) {
-    setLoaded(true);
-    setWeather({
+    setLoaded({
+      ready: true,
+      coordinates: response.data.coord,
       temperature: response.data.main.temp,
-      wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
+      wind: response.data.wind.speed,
+      city: response.data.name,
     });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    let apiKey = "4b3503b2f08a729413c4d33ef1186004";
-    let units = "metric";
+    handleCall();
+  }
+
+  function handleCall() {
+    let apiKey = "0a2c2733of6f535f4bbc5b14t3c60ea9";
+    let units = "imperial";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(showWeather);
   }
-
   function updateCity(event) {
     setCity(event.target.value);
   }
 
-  let form = (
-    <form onSubmit={handleSubmit}>
-      <input type="search" placeholder="Enter a city.." onChange={updateCity} />
-      <button type="Submit">Search</button>
-    </form>
-  );
-
-  if (loaded) {
+  if (loaded.ready) {
     return (
-      <div>
-        {form}
-        <div>Temperature: {Math.round(weather.temperature)}°C </div>
-        <div>Description: {weather.description} </div>
-        <div>Humidity: {weather.humidity}% </div>
-        <div>Wind: {weather.wind}km/h </div>
-        <img src={weather.icon} alt={weather.description} />
+      <div className="SearchEngine">
+        <form onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col-9">
+              <input
+                type="search"
+                placeholder="Enter your city.."
+                className="form-control"
+                autoFocus="on"
+                onChange={updateCity}
+              />
+            </div>
+            <div className="col-sm-3 mt-2 mt-sm-0 ps-sm-2">
+              <input
+                type="submit"
+                value="Search"
+                className="btn btn-grey-primary w-100"
+              />
+            </div>
+          </div>
+        </form>
+        <WeatherInfo data={loaded} />
+        <hr />
+        <Forecast city={loaded.city} />
       </div>
     );
   } else {
-    return form;
+    handleCall();
+    return "loading";
   }
 }
