@@ -44,21 +44,21 @@ export default function Search(props) {
     return (
       <div className="SearchEngine">
         <form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col-9">
-              <input
-                type="search"
-                placeholder="Enter your city.."
-                className="form-control col-9"
-                autoFocus="on"
-                onChange={updateCity}
-              />
-            </div>
+          <div className="row search-container">
             <div className="search-btn col-sm-3 mt-2 mt-sm-0 ps-sm-2 d-flex">
               <input
                 type="submit"
                 value="Search"
                 className="btn btn-grey-primary w-100"
+              />
+            </div>
+            <div className="col-9">
+              <input
+                type="search"
+                placeholder="Enter your city.."
+                className="form-control"
+                autoFocus="on"
+                onChange={updateCity}
               />
             </div>
           </div>
