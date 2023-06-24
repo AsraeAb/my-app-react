@@ -49,12 +49,12 @@ export default function Search(props) {
               <input
                 type="search"
                 placeholder="Enter your city.."
-                className="form-control"
+                className="form-control col-9"
                 autoFocus="on"
                 onChange={updateCity}
               />
             </div>
-            <div className="col-sm-3 mt-2 mt-sm-0 ps-sm-2">
+            <div className="search-btn col-sm-3 mt-2 mt-sm-0 ps-sm-2 d-flex">
               <input
                 type="submit"
                 value="Search"
@@ -63,9 +63,13 @@ export default function Search(props) {
             </div>
           </div>
         </form>
-        <WeatherInfo data={loaded} />
-        <hr />
-        <Forecast city={loaded.city} />
+        <div>
+          <div className="container">
+            <WeatherInfo data={loaded} />
+            <hr />
+            <Forecast coordinates={loaded.coordinates} />
+          </div>
+        </div>
       </div>
     );
   } else {

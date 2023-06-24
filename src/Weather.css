@@ -2,3 +2,31 @@
   background-color: #ffebbb;
   border-radius: 5px;
 }
+.SearchEngine {
+  display: block;
+
+  padding: 10px;
+  gap: 10px;
+}
+
+.Weather .main-weather-info {
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+.form-control {
+  padding-inline-start: 10px;
+  width: 300px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.search-btn {
+  display: flex;
+  margin-left: 0 auto;
+  border: 1px solid #f1e8d2;
+  border-radius: 10px;
+  color: #ffebbb;
+
+  width: 90px;
+}
