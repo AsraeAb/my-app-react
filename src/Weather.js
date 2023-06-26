@@ -27,6 +27,7 @@ export default function Search(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     handleCall();
   }
 
@@ -63,6 +64,7 @@ export default function Search(props) {
             </div>
           </div>
         </form>
+
         <div>
           <div className="container">
             <WeatherInfo data={loaded} />

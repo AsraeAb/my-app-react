@@ -1,11 +1,6 @@
-#search {
-  background-color: #ffebbb;
-  border-radius: 5px;
-}
 .SearchEngine {
   display: block;
   padding: 10px;
-  gap: 10px;
 }
 .Weather .main-weather-info {
   text-align: left;
@@ -19,7 +14,6 @@
   margin: 0 auto;
   margin-left: 0;
 }
-
 .search-btn {
   display: flex;
   margin-left: 20px;
@@ -28,4 +22,75 @@
   width: 90px;
   background-color: #c16c0c;
   opacity: 0.7;
+}
+.container {
+  margin: 10px auto;
+  padding: 20px 20px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  width: 750px;
+  opacity: 0.9;
+  height: 70vh;
+}
+footer {
+  min-height: 10vh;
+  margin-top: 0;
+}
+@media (max-width: 800px) {
+  .container {
+    font-size: 30px;
+    width: 700px;
+    height: 50vh;
+    margin: 4px;
+  }
+}
+@media (max-width: 600px) {
+  .SearchEngine {
+    font-size: 25px;
+  }
+
+  .form-control {
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+
+  .search-btn {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .container {
+    font-size: 20px;
+    width: 500px;
+    height: 50vh;
+    margin: 4px;
+  }
+}
+@media (max-width: 450px) {
+  .SearchEngine {
+    font-size: 20px;
+  }
+
+  .form-control {
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+
+  .search-btn {
+    font-size: 15px;
+    text-align: center;
+  }
+  .container {
+    font-size: 15px;
+    width: 300px;
+    height: 80vh;
+    margin: 4px;
+  }
+
+  .App footer {
+    text-align: center;
+    font-size: 10px;
+    margin-top: 5px;
+  }
 }
