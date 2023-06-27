@@ -17,7 +17,7 @@ function App() {
             style={{ color: "#FFEBBB", display: "inline-block" }}
             className="github-link"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             href="https://github.com/AsraeAb/my-app-react/tree/master"
           >
             Open-source code
